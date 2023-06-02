@@ -47,7 +47,20 @@ abstract class SQL{
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
+        // Include date_inserted, date_updated, and country in the $columns array
+        if ($this->date_inserted !== null) {
+            $columns['date_inserted'] = $this->date_inserted;
+        }
+        if ($this->date_updated !== null) {
+            $columns['date_updated'] = $this->date_updated;
+        }
+        if ($this->country !== null) {
+            $columns['country'] = $this->country;
+        }
+
         if(is_numeric($this->getId()) && $this->getId()>0) {
+            // Update date_updated every time save() is called
+            $this->setDateUpdated(new \DateTime());
             $sqlUpdate = [];
             foreach ($columns as $column=>$value) {
                 $sqlUpdate[] = $column."=:".$column;
@@ -55,14 +68,15 @@ abstract class SQL{
             $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
                 " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
         }else{
+            // Set date_inserted to the current date and time when a new user is created
+            $this->setDateInserted(new \DateTime());
             $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                 " (".implode("," , array_keys($columns) ).") 
-            VALUES
-             (:".implode(",:" , array_keys($columns) ).") ");
+        VALUES
+         (:".implode(",:" , array_keys($columns) ).") ");
         }
 
         $queryPrepared->execute($columns);
-
     }
 
 }

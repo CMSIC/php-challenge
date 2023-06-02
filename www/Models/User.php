@@ -12,12 +12,16 @@ class User extends SQL
     protected String $pwd;
     protected String $country;
     protected Int $status = 0;
-    private ?String $date_inserted;
-    private ?String $date_updated;
+    protected ?String $date_inserted;
+    protected ?String $date_updated;
 
     public function __construct(){
         parent::__construct();
+        $this->date_inserted = null;
+        $this->date_updated = null;
+        $this->country = null;
     }
+
 
     /**
      * @return Int
@@ -136,7 +140,7 @@ class User extends SQL
      */
     public function getDateInserted(): \DateTime
     {
-        return $this->date_inserted;
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date_inserted);
     }
 
     /**
@@ -144,7 +148,7 @@ class User extends SQL
      */
     public function setDateInserted(\DateTime $date_inserted): void
     {
-        $this->date_inserted = $date_inserted;
+        $this->date_inserted = $date_inserted->format('Y-m-d H:i:s');
     }
 
     /**
@@ -152,7 +156,7 @@ class User extends SQL
      */
     public function getDateUpdated(): \DateTime
     {
-        return $this->date_updated;
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date_updated);
     }
 
     /**
@@ -160,9 +164,7 @@ class User extends SQL
      */
     public function setDateUpdated(\DateTime $date_updated): void
     {
-        $this->date_updated = $date_updated;
+        $this->date_updated = $date_updated->format('Y-m-d H:i:s');
     }
-
-
 
 }

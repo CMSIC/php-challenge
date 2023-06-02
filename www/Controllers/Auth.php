@@ -17,18 +17,22 @@ class Auth
     {
         $form = new Register();
         $view = new View("Auth/register", "front");
+        $view->assign("formErrors", $form->errors);
         $view->assign("form", $form->getConfig());
 
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){
-            $user = new User();
-            $user->setFirstname();
-            $user->setLastname();
-            $user->setEmail();
-            $user->setPwd();
-            $user->save();
+            $formData = $form->getFields();
+            if ($formData['firstname'] && $formData['lastname'] && $formData['email'] && $formData['pwd']) {
+                $user = new User();
+                $user->setFirstname($formData['firstname']);
+                $user->setLastname($formData['lastname']);
+                $user->setEmail($formData['email']);
+                $user->setPwd($formData['pwd']);
+                $user->save();
+            }
         }
-        $view->assign("formErrors", $form->errors);
+
 
 
     }

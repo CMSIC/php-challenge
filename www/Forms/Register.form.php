@@ -64,8 +64,26 @@ class Register extends Validator
                         "required"=>true,
                         "confirm"=>"pwd"
                     ],
+                    "country"=>[
+                        "id"=>"register-form-country",
+                        "class"=>"form-input",
+                        "placeholder"=>"Pays",
+                        "type"=>"text",
+                        "error"=>"Votre pays est manquant",
+                        "required"=>true
+                    ],
                 ]
         ];
         return $this->config;
+    }
+
+    public function getFields(): array
+    {
+        return [
+            'firstname' => $_POST['firstname'] ?? null,
+            'lastname' => $_POST['lastname'] ?? null,
+            'email' => $_POST['email'] ?? null,
+            'pwd' => $_POST['pwd'] ?? null,
+        ];
     }
 }

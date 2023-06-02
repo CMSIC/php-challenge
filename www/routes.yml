@@ -22,6 +22,10 @@ logout:
   controller: Auth
   action: logout
 
+register:
+  controller: Auth
+  action: register
+
 s-inscrire:
   controller: Auth
   action: register
