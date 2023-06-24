@@ -84,6 +84,7 @@ class Register extends Validator
             'lastname' => $_POST['lastname'] ?? null,
             'email' => $_POST['email'] ?? null,
             'pwd' => $_POST['pwd'] ?? null,
+            'country' => $_POST['country'] ?? null,
         ];
     }
 }

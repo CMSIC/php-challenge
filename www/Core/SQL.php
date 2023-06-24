@@ -1,10 +1,14 @@
 <?php
 namespace App\Core;
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+
 abstract class SQL{
 
-    private $pdo;
-    private $table;
+    protected $pdo;
+    protected $table;
 
     public function __construct()
     {
@@ -16,6 +20,7 @@ abstract class SQL{
             die("Erreur SQL : ".$e->getMessage());
         }
 
+        //$this->table = static::class;
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
         $this->table = "esgi_".end($classExploded);

@@ -48,6 +48,7 @@ class View {
         include "Views/Partials/".$name.".ptl.php";
     }
 
+
     public function __destruct(){
         extract($this->data);
         include $this->template;

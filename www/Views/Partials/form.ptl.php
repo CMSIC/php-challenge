@@ -5,7 +5,9 @@
 
 <form method="<?= $config["config"]["method"] ?>"
       action="<?= $config["config"]["action"] ?>"
-      enctype="<?= $config["config"]["enctype"] ?>"
+      <?php if (isset($config["config"]["enctype"])): ?>
+          enctype="<?= $config["config"]["enctype"] ?>"
+      <?php endif; ?>
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
 
@@ -15,7 +17,7 @@
                 name="<?= $name ?>"
                 placeholder="<?= $configInput["placeholder"] ?>"
                 class="<?= $configInput["class"] ?>"
-                id="<?= $configInput["placeholder"] ?>"
+                id="<?= $configInput["id"] ?>"
                 type="<?= $configInput["type"] ?>"
                 <?= $configInput["required"]?"required":"" ?>
          ><br>
@@ -23,6 +25,8 @@
     <?php endforeach;?>
 
     <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
-    <input type="reset" value="<?= $config["config"]["reset"] ?>">
+    <?php if (isset($config["config"]["reset"])): ?>
+        <input type="reset" value="<?= $config["config"]["reset"] ?>">
+    <?php endif; ?>
 
 </form>

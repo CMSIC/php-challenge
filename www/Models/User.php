@@ -19,7 +19,6 @@ class User extends SQL
         parent::__construct();
         $this->date_inserted = null;
         $this->date_updated = null;
-        $this->country = null;
     }
 
 
@@ -138,8 +137,11 @@ class User extends SQL
     /**
      * @return \DateTime
      */
-    public function getDateInserted(): \DateTime
+    public function getDateInserted(): ?\DateTime
     {
+        if ($this->date_inserted === null) {
+            return null;
+        }
         return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date_inserted);
     }
 
@@ -154,8 +156,11 @@ class User extends SQL
     /**
      * @return \DateTime
      */
-    public function getDateUpdated(): \DateTime
+    public function getDateUpdated(): ?\DateTime
     {
+        if ($this->date_updated === null) {
+            return null;
+        }
         return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date_updated);
     }
 
@@ -166,5 +171,20 @@ class User extends SQL
     {
         $this->date_updated = $date_updated->format('Y-m-d H:i:s');
     }
+
+    public function verify(string $email, string $password): bool
+    {
+        // Prépare la requête SQL
+        $user = $this->getOneWhere(['email' => $email]);
+
+        // Vérifie si un utilisateur a été trouvé et que le mot de passe est correct
+        if ($user && password_verify($password, $user->getPwd())) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 }

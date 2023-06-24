@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 //require "Core/View.php";
