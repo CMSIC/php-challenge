@@ -34,7 +34,7 @@ class Auth
                     exit();
                 } else {
                     // Invalid email or password
-                    $view->assign("formErrors", ["email" => "Invalid email or password"]);
+                    $view->assign("formErrors", "Invalid email or password");
                 }
             }
         }
