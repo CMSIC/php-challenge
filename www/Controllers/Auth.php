@@ -7,6 +7,9 @@ use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Auth
 {
     public function login()
@@ -73,6 +76,11 @@ class Auth
     public function logout(): void
     {
         echo "Page de déconnexion";
+
+        require 'vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
+
     }
 
 }
