@@ -7,36 +7,33 @@ ini_set('display_errors', '1');
 // Passer la connexion à la bdd en singleton
 // décommenter la methode getInstance
 
-abstract class SQL{
+class SQL{
 
     protected $pdo;
-    //private static ?SQL $instance = null;
+    private static ?SQL $instance = null;
     protected $table;
 
-    public function __construct()
+    protected function __construct()
     {
-        //Connexion à la bdd
-        //SINGLETON à réaliser
         try {
             $this->pdo = new \PDO("pgsql:host=database;dbname=esgi;port=5432", "esgi", "Test1234");
         }catch(\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
-
         //$this->table = static::class;
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
         $this->table = "esgi_".end($classExploded);
     }
-/*
-    public static function getInstance(): object
+
+    public static function getInstance(): SQL
     {
         if (self::$instance === null) {
             self::$instance = new SQL();
         }
         return self::$instance;
     }
-*/
+
     public static function populate(Int $id): object
     {
         $class = get_called_class();
