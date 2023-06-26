@@ -7,6 +7,10 @@ use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
 
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+require 'vendor/autoload.php';
+
 class Auth
 {
     public function login()
@@ -40,10 +44,6 @@ class Auth
         }
     }
 
-
-
-
-
     public function register(): void
     {
         $form = new Register();
@@ -61,18 +61,70 @@ class Auth
                 $user->setEmail($formData['email']);
                 $user->setPwd($formData['pwd']);
                 $user->setCountry($formData['country']);
-                $user->setStatus(1);
+                $user->setStatus(0);
+                $token = bin2hex(random_bytes(50));  // generate a verification token
+                $user->setToken($token);
                 $user->save();
+
+                // Send verification email
+                $mail = new PHPMailer(true);
+
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = 2;
+                    $mail->isSMTP();
+                    $mail->Host = 'mail';
+                    $mail->SMTPAuth = false;
+                    $mail->Username = 'user';
+                    $mail->Password = 'pass';
+                    $mail->SMTPSecure = false;
+                    $mail->Port = 25;
+
+                    //Recipients
+                    $mail->setFrom('from@example.com', 'Mailer');
+                    $mail->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
+
+                    //Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'CMS - Welcome - Verification';
+                    $mail->Body    = 'Welcome to our website <b>' . $user->getFirstname() . '</b><br> Please click on the below link to verify your email address<br><a href="http://localhost:8080/verify.php?token=' . $token . '">Verify Email</a>';
+
+                    if($mail->send()){
+                        header('Location: /');
+                        exit();
+                    }
+
+                    } catch (Exception $e) {
+                        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                    }
+
             }
         }
+    }
 
+    public function verify(): void
+    {
+        if (!isset($_GET['token'])) {
+            die('User not found with this token');
+        }
 
+        $token = $_GET['token'];
+        $user = (new \App\Models\User)->getOneWhere(['token' => $token]);
+        if ($user) {
+            echo 'User found';
+        } else {
+            echo 'User not found';
+        }
 
     }
 
     public function logout(): void
     {
-        echo "Page de déconnexion";
+        session_start();
+        session_destroy();
+        header('Location: /');
+        exit();
+
     }
 
 }

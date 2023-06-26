@@ -4,10 +4,13 @@ namespace App\Core;
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+// Passer la connexion à la bdd en singleton
+// décommenter la methode getInstance
 
 abstract class SQL{
 
     protected $pdo;
+    //private static ?SQL $instance = null;
     protected $table;
 
     public function __construct()
@@ -25,7 +28,15 @@ abstract class SQL{
         $classExploded = explode("\\", get_called_class());
         $this->table = "esgi_".end($classExploded);
     }
-
+/*
+    public static function getInstance(): object
+    {
+        if (self::$instance === null) {
+            self::$instance = new SQL();
+        }
+        return self::$instance;
+    }
+*/
     public static function populate(Int $id): object
     {
         $class = get_called_class();
@@ -42,7 +53,8 @@ abstract class SQL{
         $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" AND ", $sqlWhere));
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute($where);
-        return ($queryPrepared->fetch() ? $queryPrepared->fetch() : null);
+        $result = $queryPrepared->fetch();  // Call fetch only once and store the result
+        return $result ? $result : null;
     }
 
 

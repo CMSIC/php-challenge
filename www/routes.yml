@@ -29,3 +29,7 @@ register:
 s-inscrire:
   controller: Auth
   action: register
+
+verify:
+  controller: Auth
+  action: verify

@@ -11,6 +11,7 @@ class User extends SQL
     protected String $email;
     protected String $pwd;
     protected String $country;
+    protected String $token;
     protected Int $status = 0;
     protected ?String $date_inserted;
     protected ?String $date_updated;
@@ -170,6 +171,22 @@ class User extends SQL
     public function setDateUpdated(\DateTime $date_updated): void
     {
         $this->date_updated = $date_updated->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @return String
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param String $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
     }
 
     public function verify(string $email, string $password): bool

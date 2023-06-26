@@ -10,7 +10,7 @@ class Main
     {
         $pseudo = "Prof";
         $view = new View("Main/home", "front");
-        $view->assign("pseudo", $pseudo);
+        $view->assign("name", $_SESSION["firstname"] ?? "inconnu");
         $view->assign("age", 30);
         $view->assign("titleseo", "supernouvellepage");
     }
