@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Super site</title>
+    <title>Front</title>
     <meta name="description" content="ceci est un super site">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Template Front</h1>
-
-    <!-- inclure la vue -->
-    <?php include $this->view;?>
-
+    <main class="w-screen h-screen bg-gray-800">
+        <!-- inclure la vue -->
+        <?php include $this->view;?>
+    </main>
 </body>
 </html>

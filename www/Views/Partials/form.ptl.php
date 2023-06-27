@@ -2,31 +2,41 @@
 <?php print_r($errors);?>
 <?php endif;?>
 
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+    </div>
+    <form method="<?= $config["config"]["method"] ?>"
+          action="<?= $config["config"]["action"] ?>"
+        <?php if (isset($config["config"]["enctype"])): ?>
+            enctype="<?= $config["config"]["enctype"] ?>"
+        <?php endif; ?>
+          id="<?= $config["config"]["id"] ?>"
+          class="<?= $config["config"]["class"] ?>">
 
-<form method="<?= $config["config"]["method"] ?>"
-      action="<?= $config["config"]["action"] ?>"
-      <?php if (isset($config["config"]["enctype"])): ?>
-          enctype="<?= $config["config"]["enctype"] ?>"
-      <?php endif; ?>
-      id="<?= $config["config"]["id"] ?>"
-      class="<?= $config["config"]["class"] ?>">
+        <?php foreach ($config["inputs"] as $name=>$configInput): ?>
 
-    <?php foreach ($config["inputs"] as $name=>$configInput): ?>
+        <div>
+            <label for="<?= $name ?>" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <div class="mt-2">
+                <input
+                    name="<?= $name ?>"
+                    placeholder="<?= $configInput["placeholder"] ?? null ?>"
+                    class="<?= $configInput["class"] ?>"
+                    id="<?= $configInput["id"] ?>"
+                    type="<?= $configInput["type"] ?>"
+                    <?= $configInput["required"]?"required":"" ?>
+                >
+            </div>
+        </div>
 
-        <input
-                name="<?= $name ?>"
-                placeholder="<?= $configInput["placeholder"] ?>"
-                class="<?= $configInput["class"] ?>"
-                id="<?= $configInput["id"] ?>"
-                type="<?= $configInput["type"] ?>"
-                <?= $configInput["required"]?"required":"" ?>
-         ><br>
+        <?php endforeach;?>
 
-    <?php endforeach;?>
-
-    <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
-    <?php if (isset($config["config"]["reset"])): ?>
-        <input type="reset" value="<?= $config["config"]["reset"] ?>">
-    <?php endif; ?>
-
-</form>
+        <div>
+            <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>" class="<?= $config["config"]["submit_class"] ?>">
+            <?php if (isset($config["config"]["reset"])): ?>
+                <input type="reset" value="<?= $config["config"]["reset"] ?>">
+            <?php endif; ?>
+        </div>
+    </form>

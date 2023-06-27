@@ -7,8 +7,9 @@ use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
 
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 class Auth
@@ -82,7 +83,7 @@ class Auth
 
                     //Recipients
                     $mail->setFrom('from@example.com', 'Mailer');
-                    $mail->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
+                    $mail->addAddress($user->getEmail(), $user->getFirstname() . ' Auth.php' . $user->getLastname());
 
                     //Content
                     $mail->isHTML(true);
