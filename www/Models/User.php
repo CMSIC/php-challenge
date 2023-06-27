@@ -18,8 +18,6 @@ class User extends SQL
 
     public function __construct(){
         parent::__construct();
-        $this->date_inserted = null;
-        $this->date_updated = null;
     }
 
 

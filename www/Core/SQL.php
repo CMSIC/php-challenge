@@ -61,23 +61,21 @@ class SQL{
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
-        // Include date_inserted, date_updated, and country in the $columns array
-        if ($this->date_inserted !== null) {
-            $columns['date_inserted'] = $this->date_inserted;
-        }
-        if ($this->date_updated !== null) {
-            $columns['date_updated'] = $this->date_updated;
-        }
-        if ($this->country !== null) {
-            $columns['country'] = $this->country;
-        }
+        var_dump($this->getEmail());
 
         if(is_numeric($this->getId()) && $this->getId()>0) {
             // Update date_updated every time save() is called
             $this->setDateUpdated(new \DateTime());
             $sqlUpdate = [];
+
             foreach ($columns as $column=>$value) {
-                $sqlUpdate[] = $column."=:".$column;
+
+                if ($column === 'date_updated') {
+                    $sqlUpdate[] = $column."= :".$column;
+                } else {
+                    $sqlUpdate[] = $column."=:".$column;
+                }
+
             }
             $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
                 " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());

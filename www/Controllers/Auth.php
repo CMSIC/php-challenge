@@ -87,9 +87,12 @@ class Auth
                     //Content
                     $mail->isHTML(true);
                     $mail->Subject = 'CMS - Welcome - Verification';
-                    $mail->Body    = 'Welcome to our website <b>' . $user->getFirstname() . '</b><br> Please click on the below link to verify your email address<br><a href="http://localhost:8080/verify.php?token=' . $token . '">Verify Email</a>';
+                    $mail->Body    = 'Welcome to our website <b>' . $user->getFirstname() . '</b><br> Please click on the below link to verify your email address<br><a target="_blank" href="http://localhost/verify?token=' . $token . '">Verify Email</a>';
 
                     if($mail->send()){
+                        session_start();
+                        $_SESSION['email'] = $user->getEmail();
+                        $_SESSION['firstname'] = $user->getId();
                         header('Location: /');
                         exit();
                     }
@@ -112,6 +115,12 @@ class Auth
         $user = (new \App\Models\User)->getOneWhere(['token' => $token]);
         if ($user) {
             echo 'User found';
+            $user->setStatus(1);
+            $user->save();
+            session_start();
+            $_SESSION['email'] = $user->getEmail();
+            $_SESSION['firstname'] = $user->getFirstname();
+            header('Location: /');
         } else {
             echo 'User not found';
         }

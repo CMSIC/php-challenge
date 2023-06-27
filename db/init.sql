@@ -7,7 +7,7 @@ CREATE TABLE esgi_user (
      email VARCHAR(255) NOT NULL,
      pwd VARCHAR(255) NOT NULL,
      country VARCHAR(255) NOT NULL,
-     token VARCHAR(255) NOT NULL,
+     token VARCHAR(255) DEFAULT NULL,
      status INT NOT NULL,
      date_inserted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
