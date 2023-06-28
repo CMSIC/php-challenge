@@ -13,3 +13,4 @@ CREATE TABLE esgi_user (
      date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      UNIQUE (email)
 );
+

@@ -18,7 +18,7 @@
         <?php foreach ($config["inputs"] as $name=>$configInput): ?>
 
         <div>
-            <label for="<?= $name ?>" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <label for="<?= $name ?>" class="block text-md font-medium leading-6 text-gray-400"><?= $name ?></label>
             <div class="mt-2">
                 <input
                     name="<?= $name ?>"
@@ -32,6 +32,8 @@
         </div>
 
         <?php endforeach;?>
+
+        <br>
 
         <div>
             <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>" class="<?= $config["config"]["submit_class"] ?>">

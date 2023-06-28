@@ -16,12 +16,13 @@ class Register extends Validator
                     "class"=>"form",
                     "enctype"=>"",
                     "submit"=>"Nous rejoindre",
-                    "reset"=>"Annuler"
+                    "reset"=>"Annuler",
+                    "submit_class"=>"flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                 ],
                 "inputs"=>[
                     "firstname"=>[
                         "id"=>"register-form-firstname",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Votre prénom",
                         "type"=>"text",
                         "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
@@ -31,7 +32,7 @@ class Register extends Validator
                     ],
                     "lastname"=>[
                         "id"=>"register-form-lastname",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Votre nom",
                         "type"=>"text",
                         "error"=>"Votre nom doit faire entre 2 et 120 caractères",
@@ -41,7 +42,7 @@ class Register extends Validator
                     ],
                     "email"=>[
                         "id"=>"register-form-email",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Votre email",
                         "type"=>"email",
                         "error"=>"Votre email est incorrect",
@@ -49,7 +50,7 @@ class Register extends Validator
                     ],
                     "pwd"=>[
                         "id"=>"register-form-pwd",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Votre mot de passe",
                         "type"=>"password",
                         "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
@@ -57,7 +58,7 @@ class Register extends Validator
                     ],
                     "pwdConfirm"=>[
                         "id"=>"register-form-pwd-confirm",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Confirmation",
                         "type"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
@@ -66,7 +67,7 @@ class Register extends Validator
                     ],
                     "country"=>[
                         "id"=>"register-form-country",
-                        "class"=>"form-input",
+                        "class"=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
                         "placeholder"=>"Pays",
                         "type"=>"text",
                         "error"=>"Votre pays est manquant",

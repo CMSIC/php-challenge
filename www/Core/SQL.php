@@ -4,8 +4,6 @@ namespace App\Core;
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-// Passer la connexion à la bdd en singleton
-// décommenter la methode getInstance
 
 class SQL{
 

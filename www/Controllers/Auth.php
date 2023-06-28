@@ -83,7 +83,7 @@ class Auth
 
                     //Recipients
                     $mail->setFrom('from@example.com', 'Mailer');
-                    $mail->addAddress($user->getEmail(), $user->getFirstname() . ' Auth.php' . $user->getLastname());
+                    $mail->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
 
                     //Content
                     $mail->isHTML(true);
@@ -122,6 +122,7 @@ class Auth
             $_SESSION['email'] = $user->getEmail();
             $_SESSION['firstname'] = $user->getFirstname();
             header('Location: /');
+            exit();
         } else {
             echo 'User not found';
         }
@@ -134,7 +135,6 @@ class Auth
         session_destroy();
         header('Location: /');
         exit();
-
     }
 
 }

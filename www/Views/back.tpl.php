@@ -7,10 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Template Back</h1>
-
-    <!-- inclure la vue -->
-    <?php include $this->view;?>
-
+    <main class="w-screen h-screen bg-gray-800">
+        <!-- inclure la vue -->
+        <?php include $this->view;?>
+    </main>
 </body>
 </html>
