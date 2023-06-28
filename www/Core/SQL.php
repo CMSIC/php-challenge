@@ -4,6 +4,10 @@ namespace App\Core;
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+require_once 'vendor/autoload.php';
+
+use Faker;
+
 
 class SQL{
 
@@ -59,7 +63,7 @@ class SQL{
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
-        var_dump($this->getEmail());
+        //var_dump($this->getEmail());
 
         if(is_numeric($this->getId()) && $this->getId()>0) {
             // Update date_updated every time save() is called
@@ -87,6 +91,20 @@ class SQL{
         }
 
         $queryPrepared->execute($columns);
+    }
+
+    public function delete(): void
+    {
+        $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table." WHERE id=".$this->getId());
+        $queryPrepared->execute();
+    }
+
+    public function getAll(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table);
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
     }
 
 }

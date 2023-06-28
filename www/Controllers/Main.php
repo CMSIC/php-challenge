@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 
+
 class Main
 {
     public function home(): void
@@ -14,7 +15,7 @@ class Main
 
     public function contact(): void
     {
-        echo "Page de contact";
+        echo "Page contact";
     }
 
     public function aboutUs(): void
