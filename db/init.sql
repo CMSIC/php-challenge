@@ -24,7 +24,9 @@ CREATE TABLE esgi_film (
      description VARCHAR(255) NOT NULL,
      year INTEGER,
      length INTEGER,
-     category VARCHAR(255)
+     category VARCHAR(255),
+     date_inserted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 

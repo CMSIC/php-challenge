@@ -63,11 +63,11 @@ class SQL{
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
-        //var_dump($this->getEmail());
-
         if(is_numeric($this->getId()) && $this->getId()>0) {
             // Update date_updated every time save() is called
-            $this->setDateUpdated(new \DateTime());
+            if (method_exists($this, 'setDateUpdated')) {
+                $this->setDateUpdated(new \DateTime());
+            }
             $sqlUpdate = [];
 
             foreach ($columns as $column=>$value) {
@@ -83,11 +83,13 @@ class SQL{
                 " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
         }else{
             // Set date_inserted to the current date and time when a new user is created
-            $this->setDateInserted(new \DateTime());
+            if (method_exists($this, 'setDateInserted')) {
+                $this->setDateInserted(new \DateTime());
+            }
             $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                 " (".implode("," , array_keys($columns) ).") 
-        VALUES
-         (:".implode(",:" , array_keys($columns) ).") ");
+    VALUES
+     (:".implode(",:" , array_keys($columns) ).") ");
         }
 
         $queryPrepared->execute($columns);

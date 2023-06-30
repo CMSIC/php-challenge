@@ -3,14 +3,31 @@
 namespace App\Models;
 
 use App\Core\SQL;
+use Faker;
 
 class Comment extends SQL
 {
-    private int $id;
-    private int $film_id;
-    private int $user_id;
-    private string $content;
-    private string $date_inserted;
+    private int $id = 0;
+    protected int $film_id;
+    protected int $user_id;
+    protected string $content;
+    protected string $date_inserted;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function generate($numRecords = 200) {
+        $faker = Faker\Factory::create();
+
+        for ($i = 0; $i < $numRecords; $i++) {
+            $this->setFilmId($faker->numberBetween(1, 50));
+            $this->setUserId($faker->numberBetween(1, 100));
+            $this->setContent($faker->text);
+            $this->save();
+        }
+    }
 
     public function getId(): int
     {
@@ -57,8 +74,8 @@ class Comment extends SQL
         return $this->date_inserted;
     }
 
-    public function setDateInserted(string $date_inserted): void
+    public function setDateInserted(\DateTime $date_inserted): void
     {
-        $this->date_inserted = $date_inserted;
+        $this->date_inserted = $date_inserted->format('Y-m-d H:i:s');
     }
 }

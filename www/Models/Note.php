@@ -3,13 +3,32 @@
 namespace App\Models;
 
 use App\Core\SQL;
+use Faker;
 
 class Note extends SQL
 {
-    private int $id;
-    private int $film_id;
-    private int $user_id;
-    private int $note;
+    private int $id = 0;
+    protected int $film_id;
+    protected int $user_id;
+    protected int $note;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function generate($numRecords = 100) {
+        $faker = Faker\Factory::create();
+
+        for ($i = 0; $i < $numRecords; $i++) {
+            $this->setFilmId($faker->numberBetween(1, 50));
+            $this->setUserId($faker->numberBetween(1, 100));
+            $this->setNote($faker->numberBetween(0, 5));
+
+            $this->save();
+        }
+    }
+
 
     public function getId(): int
     {

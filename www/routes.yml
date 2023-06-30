@@ -33,3 +33,7 @@ s-inscrire:
 verify:
   controller: Auth
   action: verify
+
+generation:
+  controller: Main
+  action: generation
