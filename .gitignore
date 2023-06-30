@@ -2,4 +2,4 @@ www/package-lock.json
 
 www/node_modules
 
-.idea/ # Ignore JetBrains IDE files
+.idea/

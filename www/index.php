@@ -42,7 +42,9 @@ if(!file_exists("routes.yml")){
 $routes = yaml_parse_file("routes.yml");
 
 if(empty($routes[$uri])){
-    die("Page 404");
+    $controller = new \App\Controllers\Main();
+    $controller->notFound();
+    exit;
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"]) ){

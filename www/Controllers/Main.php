@@ -12,6 +12,12 @@ class Main
         $view = new View("Main/home", "front");
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
     }
+    
+    public function notFound(): void
+    {
+        $view = new View("Main/404", "front");
+        $view->assign("title", "Page Not Found");
+    }
 
     public function contact(): void
     {
