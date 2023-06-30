@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\SQL;
+use Faker;
 class User extends SQL
 {
     private Int $id = 0;
@@ -20,7 +21,20 @@ class User extends SQL
         parent::__construct();
     }
 
+    public function generate($numRecords = 100) {
+        $faker = Faker\Factory::create();
 
+        for ($i = 0; $i < $numRecords; $i++) {
+            $this->setFirstname($faker->firstName);
+            $this->setLastname($faker->lastName);
+            $this->setEmail($faker->email);
+            $this->setPwd($faker->password);
+            $this->setCountry($faker->countryCode);
+            $this->setToken(bin2hex(random_bytes(50)));
+            $this->setStatus($faker->numberBetween(0, 2));
+            $this->save();
+        }
+    }
     /**
      * @return Int
      */
