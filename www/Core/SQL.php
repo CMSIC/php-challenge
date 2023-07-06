@@ -11,30 +11,28 @@ use Faker;
 
 class SQL{
 
-    protected $pdo;
+    private static \PDO $pdo;
     private static ?SQL $instance = null;
     protected $table;
 
     protected function __construct()
     {
-        try {
-            $this->pdo = new \PDO("pgsql:host=database;dbname=esgi;port=5432", "esgi", "Test1234");
-        }catch(\Exception $e){
-            die("Erreur SQL : ".$e->getMessage());
-        }
-        //$this->table = static::class;
-        //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
         $this->table = "esgi_".end($classExploded);
     }
 
-    public static function getInstance(): SQL
+    public static function getInstance(): \PDO
     {
         if (self::$instance === null) {
-            self::$instance = new SQL();
+            try {
+                self::$pdo = new \PDO("pgsql:host=database;dbname=esgi;port=5432", "esgi", "Test1234");
+            }catch(\Exception $e){
+                die("Erreur SQL : ".$e->getMessage());
+            }
         }
-        return self::$instance;
+        return self::$pdo;
     }
+
 
     public static function populate(Int $id): object
     {
@@ -49,7 +47,7 @@ class SQL{
         foreach ($where as $column=>$value) {
             $sqlWhere[] = $column."=:".$column;
         }
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" AND ", $sqlWhere));
+        $queryPrepared = self::getInstance()->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" AND ", $sqlWhere));
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute($where);
         $result = $queryPrepared->fetch();  // Call fetch only once and store the result
@@ -79,14 +77,14 @@ class SQL{
                 }
 
             }
-            $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
+            $queryPrepared = self::getInstance()->prepare("UPDATE ".$this->table.
                 " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
         }else{
             // Set date_inserted to the current date and time when a new user is created
             if (method_exists($this, 'setDateInserted')) {
                 $this->setDateInserted(new \DateTime());
             }
-            $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
+            $queryPrepared = self::getInstance()->prepare("INSERT INTO ".$this->table.
                 " (".implode("," , array_keys($columns) ).") 
     VALUES
      (:".implode(",:" , array_keys($columns) ).") ");
@@ -97,13 +95,13 @@ class SQL{
 
     public function delete(): void
     {
-        $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table." WHERE id=".$this->getId());
+        $queryPrepared = self::getInstance()->prepare("DELETE FROM ".$this->table." WHERE id=".$this->getId());
         $queryPrepared->execute();
     }
 
     public function getAll(): array
     {
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table);
+        $queryPrepared = self::getInstance()->prepare("SELECT * FROM ".$this->table);
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();

@@ -99,7 +99,7 @@ class Auth
                     if($mail->send()){
                         session_start();
                         $_SESSION['email'] = $user->getEmail();
-                        $_SESSION['firstname'] = $user->getId();
+                        $_SESSION['firstname'] = $user->getFirstname();
                         $_SESSION['user_id'] = $user->getId();
                         // get
                         header('Location: /');

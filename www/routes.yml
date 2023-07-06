@@ -34,6 +34,6 @@ verify:
   controller: Auth
   action: verify
 
-generation:
-  controller: Main
-  action: generation
+dashboard:
+  controller: Admin
+  action: dashboard
