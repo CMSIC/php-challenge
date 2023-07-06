@@ -12,9 +12,10 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
     <!-- Include Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../public/css/main.css">
 </head>
 <body>
-    <main class="w-screen h-screen">
+    <main class="w-screen h-screen text-white bg-gray-800">
         <!-- inclure la vue -->
         <?php include $this->view;?>
     </main>

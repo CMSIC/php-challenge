@@ -6,10 +6,10 @@
 <table id="myTable">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th></th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Role</th>
+        <th class="text-center"></th>
         <!-- Add more columns as needed -->
     </tr>
     </thead>
@@ -17,9 +17,9 @@
     <!-- Your rows will go here -->
     <?php foreach ($users as $user): ?>
         <tr>
-            <td class="text-center"><?= $user->getFirstname() . " " . $user->getLastname() ?></td>
-            <td class="text-center"><?= $user->getEmail() ?></td>
-            <td class="text-center">
+            <td><?= $user->getFirstname() . " " . $user->getLastname() ?></td>
+            <td><?= $user->getEmail() ?></td>
+            <td>
                 <?php
 
                 switch ($user->getStatus()) {
@@ -36,7 +36,7 @@
 
                 ?>
             </td>
-            <td class="text-center">supprimer</td>
+            <td class="text-center"><button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">Supprimer</button></td>
             <!-- Add more columns as needed -->
         </tr>
     <?php endforeach; ?>
