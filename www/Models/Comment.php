@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Core\SQL;
-use Faker;
 
 class Comment extends SQL
 {
@@ -16,17 +15,6 @@ class Comment extends SQL
     public function __construct()
     {
         parent::__construct();
-    }
-
-    public function generate($numRecords = 200) {
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < $numRecords; $i++) {
-            $this->setFilmId($faker->numberBetween(1, 50));
-            $this->setUserId($faker->numberBetween(1, 100));
-            $this->setContent($faker->text);
-            $this->save();
-        }
     }
 
     public function getId(): int

@@ -46,7 +46,7 @@ class Login extends Validator
     {
         return [
             'email' => $_POST['email'] ?? null,
-            'pwd' => $_POST['pwd'] ?? null,
+            'pwd' => $_POST['password'] ?? null,
         ];
     }
 }

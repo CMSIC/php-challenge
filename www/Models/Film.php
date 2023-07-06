@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Core\SQL;
-use Faker;
 
 class Film extends SQL
 {
@@ -19,19 +18,7 @@ class Film extends SQL
         parent::__construct();
     }
 
-    public function generate($numRecords = 50) {
-        $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < $numRecords; $i++) {
-            $this->setTitle($faker->sentence(3));
-            $this->setDescription($faker->text);
-            $this->setYear($faker->year);
-            $this->setLength($faker->numberBetween(60, 180));
-            $this->setCategory($faker->word);
-
-            $this->save();
-        }
-    }
 
     /**
      * Get the ID of the film.

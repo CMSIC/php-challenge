@@ -23,15 +23,21 @@ class Auth
 
         if($form->isSubmited() && $form->isValid()){
             $formData = $form->getFields();
+            //echo "formdata";
+            //var_dump($formData);
             if ($formData['email'] && $formData['pwd']) {
+                //echo "formdata2";
                 $user = new User();
                 $user = $user->getOneWhere(['email' => $formData['email']]);
+                //var_dump($user);
                 // Assuming you have a getPassword method in User model which return the user's password.
                 if($user && password_verify($formData['pwd'], $user->getPwd())) {
                     // Start session and store user details in session
                     session_start();
+                    echo "session start";
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['email'] = $user->getEmail();
+                    $_SESSION['firstname'] = $user->getFirstname();
                     // Other user details you want to store in session
 
                     // Redirect to homepage after successful login
@@ -94,6 +100,8 @@ class Auth
                         session_start();
                         $_SESSION['email'] = $user->getEmail();
                         $_SESSION['firstname'] = $user->getId();
+                        $_SESSION['user_id'] = $user->getId();
+                        // get
                         header('Location: /');
                         exit();
                     }

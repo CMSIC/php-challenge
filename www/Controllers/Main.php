@@ -14,6 +14,7 @@ class Main
     {
         $view = new View("Main/home", "front");
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
+        //var_dump($_SESSION);
     }
     
     public function notFound(): void
