@@ -38,7 +38,10 @@ class Auth
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['email'] = $user->getEmail();
                     $_SESSION['firstname'] = $user->getFirstname();
-                    // Other user details you want to store in session
+                    if ($user->getStatus() == 2) {
+                        header('Location: /dashboard');
+                        exit();
+                    }
 
                     // Redirect to homepage after successful login
                     header('Location: /');

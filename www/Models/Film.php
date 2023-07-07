@@ -19,7 +19,6 @@ class Film extends SQL
     }
 
 
-
     /**
      * Get the ID of the film.
      *

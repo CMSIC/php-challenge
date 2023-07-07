@@ -9,7 +9,7 @@ class Admin
     public function dashboard(): void
     {
         // Check if the user is logged in and has admin status
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_id']) && (new \App\Models\User)->getOneWhere(['id' => $_SESSION['user_id']])) {
             $user = User::populate($_SESSION['user_id']);
             if ($user->getStatus() == 2) {
                 $users = $user->getAll();

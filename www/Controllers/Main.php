@@ -28,19 +28,6 @@ class Main
         echo "Page contact";
     }
 
-    public function generation(): void
-    {
-        echo "Page contact";
-        $film = new Film();
-        $film->generate();
-        $user = new User();
-        $user->generate();
-        $note = new Note();
-        $note->generate();
-        $comment = new Comment();
-        $comment->generate();
-    }
-
     public function aboutUs(): void
     {
         echo "Page à propos";
