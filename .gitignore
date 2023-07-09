@@ -3,3 +3,5 @@ www/package-lock.json
 www/node_modules
 
 .idea/
+
+.idea
