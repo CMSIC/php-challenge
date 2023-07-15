@@ -40,7 +40,7 @@ bouton pour ajouter film
         </div>
 
         <?php
-        if($admin){
+        if(isset($admin)){
             echo '<button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 mt-4 border-b-4 border-green-700 hover:border-green-500 rounded transition-all ease-in-out delay-200" data-modal-target="movie-add-modal" data-modal-toggle="movie-add-modal">Ajouter un film</button>';
         }
         ?>
