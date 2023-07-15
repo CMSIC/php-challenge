@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../public/css/main.css">
 </head>
 <body>
-    <main class="w-screen h-screen text-white bg-gray-800">
+    <main class="w-screen h-screen text-white bg-gray-800 flex">
         <!-- inclure la vue -->
         <?php include $this->view;?>
     </main>

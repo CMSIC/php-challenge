@@ -26,7 +26,8 @@ CREATE TABLE esgi_film (
      length INTEGER,
      category VARCHAR(255),
      date_inserted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+     date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     image VARCHAR(255) DEFAULT 'default.svg' not null
 );
 
 

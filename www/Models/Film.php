@@ -6,16 +6,36 @@ use App\Core\SQL;
 
 class Film extends SQL
 {
-    private int $id = 0;
-    protected string $title;
-    protected ?string $description;
-    protected ?int $year;
-    protected ?int $length;
-    protected ?string $category;
+    protected Int $id;
+    protected String $title;
+    protected String $description;
+    protected Int $year;
+    protected Int $length;
+    protected String $category;
+    protected ?String $date_inserted;
+    protected ?String $date_updated;
+    protected ?String $image;
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+
+    /**
+     * @return String|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param String|null $image
+     */
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
     }
 
 

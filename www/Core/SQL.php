@@ -107,4 +107,12 @@ class SQL{
         return $queryPrepared->fetchAll();
     }
 
+    public function get(int $number): array
+    {
+        $queryPrepared = self::getInstance()->prepare("SELECT * FROM ".$this->table." LIMIT ".$number);
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+
 }
