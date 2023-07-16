@@ -37,3 +37,9 @@ verify:
 dashboard:
   controller: Admin
   action: dashboard
+
+film-review:
+  controller: Main
+  action: review
+  params:
+    - id

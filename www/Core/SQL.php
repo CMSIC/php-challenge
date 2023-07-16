@@ -115,4 +115,13 @@ class SQL{
         return $queryPrepared->fetchAll();
     }
 
+    public function getLastInserted(int $number): array
+    {
+        $queryPrepared = self::getInstance()->prepare("SELECT * FROM " . $this->table . " ORDER BY date_inserted DESC LIMIT :number");
+        $queryPrepared->bindParam(':number', $number, \PDO::PARAM_INT);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+
 }

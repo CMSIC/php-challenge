@@ -56,4 +56,16 @@ class Note extends SQL
     {
         $this->note = $note;
     }
+
+    public function getAverageNoteForFilm($id): float
+    {
+        $queryPrepared = self::getInstance()->prepare("SELECT AVG(note) AS average FROM esgi_note WHERE film_id = :filmId");
+        $queryPrepared->execute([':filmId' => $id]);
+        $average = (float) $queryPrepared->fetchColumn();
+
+        // Arrondir la valeur à 0,5 près
+        $roundedAverage = round($average * 2) / 2;
+
+        return $roundedAverage;
+    }
 }

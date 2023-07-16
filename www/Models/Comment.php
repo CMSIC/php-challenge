@@ -66,4 +66,20 @@ class Comment extends SQL
     {
         $this->date_inserted = $date_inserted->format('Y-m-d H:i:s');
     }
+
+    public function getCommentsForFilm($id)
+    {
+        $queryPrepared = self::getInstance()->prepare("SELECT * FROM " . $this->table ." WHERE film_id = :filmId");
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, \App\Models\Comment::class);
+        $queryPrepared->execute([':filmId' => $id]);
+        return $queryPrepared->fetchAll();
+    }
+
+    public function getUserInfo()
+    {
+        $queryPrepared = self::getInstance()->prepare("SELECT firstname, lastname FROM esgi_user WHERE id = " . $this->user_id);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, \App\Models\User::class);
+        $queryPrepared->execute();
+        return $queryPrepared->fetch();
+    }
 }
