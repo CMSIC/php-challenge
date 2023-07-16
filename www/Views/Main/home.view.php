@@ -1,4 +1,7 @@
-<h2 class="fixed top-0 right-0 m-4 text-white">Welcome <?= $name; ?> </h2>
+<?php
+include __DIR__ .  "/../header.view.php";
+?>
+<!-- <h2 class="fixed top-0 right-0 m-4 text-white">Welcome <?= $name; ?> </h2> -->
 <!-- Main modal -->
 <div id="movie-add-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
 <!--  bug avec le partial à l'assignation dans la vue  --><?php //= $this->partial("movieFrom", $movieform, $formsErrors) ?>
