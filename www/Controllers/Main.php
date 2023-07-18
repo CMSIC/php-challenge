@@ -9,22 +9,22 @@ use App\Models\Film;
 use App\Models\Note;
 use App\Models\Comment;
 
-class Main
+class Main extends Controller
 {
     public function home(): void
     {
         $films = (new \App\Models\Film)->getLastInserted(8);
         $view = new View("Main/home", "front");
+
+        $this->assignUserAndAdminStatus($view);
+
         $view->assign("films", $films);
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
-        if(isset($_SESSION["user_id"])){
-            $user = new User();
-            if($user->getOneWhere(["id"=>$_SESSION["user_id"]])->getStatus() === 2){
-                $view->assign("admin", true);
-            } else {
-                $view->assign("admin", false);
-            }
-        }
+
+        $movieForm = new \App\Forms\Film();
+        $view->assign("formErrors", $movieForm->errors);
+        $view->assign("movieForm", $movieForm->getConfig());
+
     }
 
     public function review(): void
@@ -43,6 +43,8 @@ class Main
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
         $view->assign("averageNote", $averageNote);
         $view->assign("comments", $comments);
+
+        $this->assignUserAndAdminStatus($view);
     }
     
     public function notFound(): void

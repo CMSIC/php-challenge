@@ -14,35 +14,40 @@
             <h2 class="text-xl font-bold mb-4">Comments</h2>
             <?php foreach ($comments as $comment): ?>
                 <?php
-                $user = $comment->getUserInfo();
+                $commentUser = $comment->getUserInfo();
                 ?>
                 <div class="bg-gray-100 px-4 py-2 mb-2">
                     <p class="text-gray-800"><?= $comment->getContent() ?></p>
-                    <p class="text-gray-500 font-bold">Posted by <?= $user->getFirstname() ?> on <?= $comment->getDateInserted() ?></p>
+                    <p class="text-gray-500 font-bold">Posted by <?= $commentUser->getFirstname() ?> on <?= $comment->getDateInserted() ?></p>
+                    <?php if($admin === true){ ?>
                     <button class="delete-comment" data-comment-id="<?= $comment->getId() ?>">Supprimer</button>
+                    <?php } ?>
                 </div>
             <?php endforeach; ?>
-            <!-- Ajout du formulaire pour poster un commentaire -->
-            <div class="mt-4">
-                <h3 class="text-lg font-bold mb-2">Add a Comment</h3>
-                <form id="comment-form" class="w-full max-w-lg">
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="comment-content">
-                                Comment
-                            </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="comment-content" name="comment" type="text">
-                            <p class="text-red-500 text-xs italic hidden" id="comment-error"></p>
+
+            <?php if($user || $admin){ ?>
+                <!-- Ajout du formulaire pour poster un commentaire -->
+                <div class="mt-4">
+                    <h3 class="text-lg font-bold mb-2">Add a Comment</h3>
+                    <form id="comment-form" class="w-full max-w-lg">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full md:w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="comment-content">
+                                    Comment
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="comment-content" name="comment" type="text">
+                                <p class="text-red-500 text-xs italic hidden" id="comment-error"></p>
+                            </div>
+                            <div class="w-full md:w-full px-3">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                                    Post Comment
+                                </button>
+                            </div>
                         </div>
-                        <div class="w-full md:w-full px-3">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                                Post Comment
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- Fin du formulaire -->
+                    </form>
+                </div>
+                <!-- Fin du formulaire -->
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -52,6 +57,7 @@
         return urlParams.get('id');
     }
 
+    <?php if($user){ ?>
     $(document).ready(function() {
         $('#comment-form').on('submit', function(e) {
             e.preventDefault();
@@ -77,22 +83,24 @@
             });
         });
     });
+    <?php } ?>
 
-    $(document).ready(function() {
-        $('.delete-comment').on('click', function() {
-            var commentId = $(this).data('comment-id');
+    <?php if($admin){ ?>
+        $(document).ready(function() {
+            $('.delete-comment').on('click', function() {
+                var commentId = $(this).data('comment-id');
 
-            $.ajax({
-                url: '/api/comments?id=' + commentId,
-                type: 'DELETE',
-                success: function() {
-                    location.reload();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    $('#comment-error').text('Erreur lors de la suppression du commentaire : ' + errorThrown).show();
-                }
+                $.ajax({
+                    url: '/api/comments?id=' + commentId,
+                    type: 'DELETE',
+                    success: function() {
+                        location.reload();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#comment-error').text('Erreur lors de la suppression du commentaire : ' + errorThrown).show();
+                    }
+                });
             });
         });
-    });
-
+    <?php } ?>
 </script>

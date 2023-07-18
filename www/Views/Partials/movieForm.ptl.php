@@ -1,6 +1,4 @@
-<?php if(!empty($errors)): ?>
-<?php print_r($errors);?>
-<?php endif;?>
+
 <!-- Include dans un modal flowbite -->
 
 <div class="relative w-full max-w-md max-h-full">
