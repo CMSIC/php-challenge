@@ -41,13 +41,13 @@ CREATE TABLE esgi_note (
 );
 
 CREATE TABLE esgi_comment (
-     id SERIAL PRIMARY KEY,
-     film_id INTEGER NOT NULL,
-     user_id INTEGER NOT NULL,
-     content TEXT,
-     date_inserted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     FOREIGN KEY (film_id) REFERENCES esgi_film (id),
-     FOREIGN KEY (user_id) REFERENCES esgi_user (id)
+  id SERIAL PRIMARY KEY,
+  film_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  content TEXT,
+  date_inserted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (film_id) REFERENCES esgi_film (id),
+  FOREIGN KEY (user_id) REFERENCES esgi_user (id)
 );
 
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (1, 'Adib', 'HAMCHI', 'adib.hamchi@hotmail.fr', '$2a$10$oIuMtDros8N5IY4UQqtzPOcEFcsDTg.AMzMX6luE7xClZiu9cLUGK', 'FR', '85bc39555aef1d139875c3c95164103f16233088cd607d83ac0f9e869d0c7d2d4a58f51c8d19df95e488f7735cda29995dd7', 2, '2023-06-30 18:58:13.531179', '2023-06-30 18:58:13.531179');
@@ -404,6 +404,8 @@ INSERT INTO public.esgi_comment (id, film_id, user_id, content, date_inserted) V
 INSERT INTO public.esgi_comment (id, film_id, user_id, content, date_inserted) VALUES (198, 30, 6, 'Quam nemo laudantium dolores illum aut officiis. Eveniet ea nam asperiores aliquam. Qui facilis illo cumque voluptatem dolorum ut asperiores perspiciatis. Nostrum quaerat ab id minima distinctio qui.', '2023-07-07 15:00:30.000000');
 INSERT INTO public.esgi_comment (id, film_id, user_id, content, date_inserted) VALUES (199, 49, 98, 'Sed harum nobis minus assumenda harum. Natus rerum tenetur aspernatur a sit repudiandae. Iusto eum in recusandae et quod accusantium velit mollitia.', '2023-07-07 15:00:30.000000');
 INSERT INTO public.esgi_comment (id, film_id, user_id, content, date_inserted) VALUES (200, 50, 57, 'Qui ea earum rerum. Laborum natus voluptatum tempore omnis voluptatem voluptate corrupti molestias. Harum accusamus sit dolor. Pariatur magnam velit et consequatur error veniam.', '2023-07-07 15:00:30.000000');
+SELECT setval('esgi_comment_id_seq', (SELECT MAX(id) FROM esgi_comment));
+
 
 INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (1, 13, 81, 5);
 INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (2, 37, 66, 2);

@@ -19,8 +19,80 @@
                 <div class="bg-gray-100 px-4 py-2 mb-2">
                     <p class="text-gray-800"><?= $comment->getContent() ?></p>
                     <p class="text-gray-500 font-bold">Posted by <?= $user->getFirstname() ?> on <?= $comment->getDateInserted() ?></p>
+                    <button class="delete-comment" data-comment-id="<?= $comment->getId() ?>">Supprimer</button>
                 </div>
             <?php endforeach; ?>
+            <!-- Ajout du formulaire pour poster un commentaire -->
+            <div class="mt-4">
+                <h3 class="text-lg font-bold mb-2">Add a Comment</h3>
+                <form id="comment-form" class="w-full max-w-lg">
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="comment-content">
+                                Comment
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="comment-content" name="comment" type="text">
+                            <p class="text-red-500 text-xs italic hidden" id="comment-error"></p>
+                        </div>
+                        <div class="w-full md:w-full px-3">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                                Post Comment
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Fin du formulaire -->
         </div>
     </div>
 </div>
+<script type="application/javascript">
+    function getFilmIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    $(document).ready(function() {
+        $('#comment-form').on('submit', function(e) {
+            e.preventDefault();
+
+            var content = $('#comment-content').val();
+
+            let filmId = getFilmIdFromUrl();
+            $.ajax({
+                url: '/api/comments', // plus besoin de passer les variables dans l'URL
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    film_id: filmId,
+                    user_id: <?= $_SESSION['user_id'] ?>,
+                    content: content
+                }),
+                success: function() {
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#comment-error').text('Erreur lors de l\'ajout du commentaire : ' + errorThrown).show();
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $('.delete-comment').on('click', function() {
+            var commentId = $(this).data('comment-id');
+
+            $.ajax({
+                url: '/api/comments?id=' + commentId,
+                type: 'DELETE',
+                success: function() {
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#comment-error').text('Erreur lors de la suppression du commentaire : ' + errorThrown).show();
+                }
+            });
+        });
+    });
+
+</script>
