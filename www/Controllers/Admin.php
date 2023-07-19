@@ -13,18 +13,34 @@ class Admin
             $user = User::populate($_SESSION['user_id']);
             if ($user->getStatus() == 2) {
                 $users = $user->getAll();
+                $allfilms = (new \App\Models\Film)->getAll();
                 // The user is an admin, so show the dashboard
                 $view = new View("Admin/dashboard", "back");
                 $view->assign("name", $user->getFirstname());
                 $view->assign("users", $users);
-            } else {
-                // The user is not an admin, so redirect them or show an error
-                header('Location: /404');
-                exit();
+                $view->assign("films", $allfilms);
+
+                $movieForm = new \App\Forms\Film();
+                $view->assign("formErrors", $movieForm->errors);
+                $view->assign("movieForm", $movieForm->getConfig());
+
+                if ($movieForm->isSubmited() && $movieForm->isValid()){
+                    $formData = $movieForm->getFields();
+                    $film = new \App\Models\Film();
+                    $film->setTitle($formData['title']);
+                    $film->setDescription($formData['description']);
+                    $film->setYear($formData['year']);
+                    $film->setLength($formData['length']);
+                    $film->setCategory($formData['category']);
+                    $film->save();
+                    //var_dump($film);
+                    header('Location: /dashboard');
+                    exit();
+                }
             }
+
         } else {
-            // The user is not logged in, so redirect them to the login page
-            header('Location: /login');
+            header('Location: /404');
             exit();
         }
     }

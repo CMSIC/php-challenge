@@ -9,7 +9,9 @@
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Movies</a>
+                        <button id="showFilms" class="text-gray-300 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium">Movies</button>
+                        <button id="showUsers" class="text-gray-300 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium hidden">Users</button>
+                        <button  class="text-gray-300 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium" data-modal-target="movie-add-modal" data-modal-toggle="movie-add-modal">Add Movie</button>
                         <a href="/logout" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Logout</a>
                     </div>
                 </div>

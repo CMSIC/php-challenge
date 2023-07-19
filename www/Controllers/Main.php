@@ -21,10 +21,6 @@ class Main extends Controller
         $view->assign("films", $films);
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
 
-        $movieForm = new \App\Forms\Film();
-        $view->assign("formErrors", $movieForm->errors);
-        $view->assign("movieForm", $movieForm->getConfig());
-
     }
 
     public function review(): void
