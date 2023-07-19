@@ -52,19 +52,49 @@ class Film extends Validator
                     "type" => "number",
                     "error" => "Length is required",
                     "required" => true
+                ],
+                "category" => [
+                    "id" => "film-form-category",
+                    "class" => "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white",
+                    "placeholder" => "Category",
+                    "type" => "select",
+                    "options" => [
+                        "Comedy" => "Comedy",
+                        "Drama" => "Drama",
+                        "Action" => "Action",
+                        "Horror" => "Horror",
+                        "Thriller" => "Thriller",
+                        "Western" => "Western",
+                        "Animation" => "Animation",
+                        "Documentary" => "Documentary",
+                        "Science Fiction" => "Science Fiction",
+                        "Fantasy" => "Fantasy",
+                        "Crime" => "Crime",
+                        "Adventure" => "Adventure",
+                        "Mystery" => "Mystery",
+                        "Romance" => "Romance",
+                        "Family" => "Family",
+                        "War" => "War",
+                        "Music" => "Music",
+                        "History" => "History",
+                        "TV Movie" => "TV Movie"
+                    ],
+                    "error" => "Category is required",
+                    "required" => true
                 ]
             ]
         ];
         return $this->config;
     }
 
-public function getFields(): array
+    public function getFields(): array
     {
         return [
             'title' => $_POST['title'] ?? null,
             'description' => $_POST['description'] ?? null,
             'year' => $_POST['year'] ?? null,
             'length' => $_POST['length'] ?? null,
+            'category' => $_POST['category'] ?? null,
         ];
     }
 

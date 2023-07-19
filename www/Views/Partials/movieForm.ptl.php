@@ -13,28 +13,42 @@
         <div class="px-6 py-6 lg:px-8">
             <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Nouveau film</h3>
             <form method="<?= $config["config"]["method"] ?>"
-                  action="<?= $config["config"]["action"] ?>"
                 <?php if (isset($config["config"]["enctype"])): ?>
                     enctype="<?= $config["config"]["enctype"] ?>"
                 <?php endif; ?>
+                  action="<?= $config["config"]["action"] ?>"
                   id="<?= $config["config"]["id"] ?>"
                   class="<?= $config["config"]["class"] ?>">
 
                 <?php foreach ($config["inputs"] as $name=>$configInput): ?>
                     <div>
-                        <label for="<?= $name ?>" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
-                        <input
-                            name="<?= $name ?>"
-                            placeholder="<?= $configInput["placeholder"] ?? null ?>"
-                            class="<?= $configInput["class"] ?>"
-                            id="<?= $configInput["id"] ?>"
-                            type="<?= $configInput["type"] ?>"
-                            <?= $configInput["required"]?"required":"" ?>
-                        >
+                        <label for="<?= $name ?>" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?= ucfirst($name) ?></label>
+                        <?php if($configInput["type"] === "select"): ?>
+                            <select
+                                    name="<?= $name ?>"
+                                    class="<?= $configInput["class"] ?>"
+                                    id="<?= $configInput["id"] ?>"
+                                <?= $configInput["required"]?"required":"" ?>
+                            >
+                                <?php foreach ($configInput["options"] as $value=>$label): ?>
+                                    <option value="<?= $value ?>"><?= $label ?></option>
+                                <?php endforeach;?>
+                            </select>
+                        <?php else: ?>
+                            <input
+                                    name="<?= $name ?>"
+                                    placeholder="<?= $configInput["placeholder"] ?? null ?>"
+                                    class="<?= $configInput["class"] ?>"
+                                    id="<?= $configInput["id"] ?>"
+                                    type="<?= $configInput["type"] ?>"
+                                <?= $configInput["required"]?"required":"" ?>
+                            >
+                        <?php endif; ?>
                     </div>
                 <?php endforeach;?>
 
-                <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>" class="<?= $config["config"]["submit_class"] ?>">
+
+                <input type="submit" name="submit" class="<?= $config["config"]["submit_class"] ?>" value="<?= $config["config"]["submit"] ?>">
                 <?php if (isset($config["config"]["reset"])): ?>
                     <input type="reset" value="<?= $config["config"]["reset"] ?>">
                 <?php endif; ?>

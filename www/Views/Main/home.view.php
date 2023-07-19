@@ -59,4 +59,34 @@ bouton pour ajouter film
     const $targetEl = document.getElementById('modalEl');
     const modal = new Modal($targetEl);
     modal.show();
+
+    <?php if(isset($admin) &&  $admin === true){ ?>
+
+        $(document).ready(function() {
+            $('#film-form').on('submit', function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                let object = {};
+                formData.forEach((value, key) => {object[key] = value});
+                let json = JSON.stringify(object);
+
+                $.ajax({
+                    url: '/api/films',
+                    type: 'POST',
+                    data: json,
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function(result) {
+                        console.log("Ok"); // Afficher "Ok" dans la console en cas de succès
+                        console.log(result); // Afficher le résultat de l'API dans la console
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error); // Afficher l'erreur dans la console
+                    }
+                });
+            });
+        });
+    <?php } ?>
+
 </script>

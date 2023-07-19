@@ -150,6 +150,8 @@ INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, toke
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (99, 'Clay', 'STIEDEMANN', 'cecil42@considine.com', '$2y$10$G3Mi5Ks2qWFoxywfEYPcPONS.iZBpWHUo9VicW8d/DR4Gw25nf3K2', 'GN', '5cb4fbbae4849ef87322e1304128cce00d8782c545b98db4cbbacffffb504698162464aa38b96a86826eb566790271f933be', 0, '2023-06-30 18:58:17.000000', '2023-06-30 18:58:17.800145');
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (100, 'Ayden', 'KUHLMAN', 'ogoldner@hotmail.com', '$2y$10$nk7HOPvqE0CTaOthC0n//u78iBzgywWL5jIzy0W3CFByLy7D6byZi', 'CY', 'ac4101db3fe285a9f396e9a682b65915b5c63f92cd846b844431b9075fd8dd3cd7eeb1ca1baa7c0dae3cb68888eb867407bb', 2, '2023-06-30 18:58:17.000000', '2023-06-30 18:58:17.844107');
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (101, 'Everardo', 'GUSIKOWSKI', 'hoeger.elvis@gutmann.com', '$2y$10$oIIxXrc47uwgfhD2wZOLDeAOI1qbQIstSkHm3uy4FuaKroUyVWLNe', 'BD', '7935bfab7a1d991df50785b0e177efb5d8cceed70e223c6e7f8006b6f7c03eb14cc95455ff40e9374790262ec5681a274029', 1, '2023-06-30 18:58:17.000000', '2023-06-30 18:58:17.887937');
+SELECT setval('esgi_user_id_seq', (SELECT MAX(id) FROM esgi_user));
+
 
 INSERT INTO public.esgi_film (id, title, description, year, length, category, date_inserted, date_updated) VALUES (1, 'Alias ratione.', 'At illo saepe aspernatur veritatis voluptatem vero voluptatem. Qui quisquam ipsa qui beatae voluptate molestiae. Omnis sit sunt reiciendis velit.', 1982, 152, 'atque', '2023-07-07 14:58:41.964615', '2023-07-07 14:58:41.964615');
 INSERT INTO public.esgi_film (id, title, description, year, length, category, date_inserted, date_updated) VALUES (2, 'Qui est odit distinctio.', 'Amet rem sit necessitatibus laborum. Consequatur ut velit consequatur a. Consectetur cupiditate nam ea nemo. Suscipit perferendis nam facilis aut aliquid aliquid.', 2009, 65, 'sed', '2023-07-07 14:58:41.971543', '2023-07-07 14:58:41.971543');
@@ -201,7 +203,7 @@ INSERT INTO public.esgi_film (id, title, description, year, length, category, da
 INSERT INTO public.esgi_film (id, title, description, year, length, category, date_inserted, date_updated) VALUES (48, 'Error quia.', 'Inventore itaque incidunt saepe rem numquam consequuntur. Voluptas eveniet rem praesentium voluptate. Ab quos sed sapiente quas.', 2018, 73, 'aspernatur', '2023-07-07 14:58:42.296844', '2023-07-07 14:58:42.296844');
 INSERT INTO public.esgi_film (id, title, description, year, length, category, date_inserted, date_updated) VALUES (49, 'Asperiores quia fuga placeat.', 'Voluptas expedita quis repellendus distinctio iste. Odit quis dolor et quia. Dolores ea quas et earum quaerat accusamus ratione.', 2007, 165, 'minima', '2023-07-07 14:58:42.303378', '2023-07-07 14:58:42.303378');
 INSERT INTO public.esgi_film (id, title, description, year, length, category, date_inserted, date_updated) VALUES (50, 'Maxime animi iure pariatur.', 'Nulla praesentium hic amet tempore. Molestiae saepe saepe nulla quod architecto corporis omnis tempora. Inventore minima eos in aut vero id. Ipsam inventore sunt dicta fugit molestiae perferendis.', 1976, 81, 'repellat', '2023-07-07 14:58:42.310171', '2023-07-07 14:58:42.310171');
-
+SELECT setval('esgi_film_id_seq', (SELECT MAX(id) FROM esgi_film));
 
 
 INSERT INTO public.esgi_comment (id, film_id, user_id, content, date_inserted) VALUES (1, 26, 8, 'Necessitatibus eius delectus laborum nam sit ut. Tempora voluptas eius labore ex non. Architecto magnam nihil non perferendis hic enim. Eum voluptates temporibus et nam.', '2023-07-07 15:00:29.402268');
@@ -446,4 +448,4 @@ INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (36, 48, 95, 5)
 INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (37, 48, 95, 4);
 INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (38, 48, 95, 3);
 INSERT INTO public.esgi_note (id, film_id, user_id, note) VALUES (39, 48, 95, 2);
-
+SELECT setval('esgi_note_id_seq', (SELECT MAX(id) FROM esgi_note));

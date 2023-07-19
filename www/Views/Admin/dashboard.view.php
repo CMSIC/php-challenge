@@ -1,9 +1,9 @@
 <?php
-    $users = (new App\Models\User)->getAll();
-    //var_dump($users);
+include __DIR__ . "/../adminHeader.view.php";
 ?>
-<div class="my-auto w-full">
-    <table id="myTable" class="">
+
+<div class=" flex">
+    <table id="myTable" class=" w-5/6 mx-auto">
         <thead>
         <tr>
             <th class="text-center">Name</th>

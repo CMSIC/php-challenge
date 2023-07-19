@@ -36,21 +36,6 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 
 if ($route === "comments") {
-    if ($method === "GET") {
-        /**
-         * Importe le contenu d'un fichier spécifique dans un autre
-         *
-         * @see https://www.php.net/manual/en/function.include.php
-         */
-        include __DIR__ . "/controllers/comments/get.php";
-
-        /**
-         * Permet de stopper l'exécution du processus à l'endroit où est appelé cette fonction
-         *
-         * @see https://www.php.net/manual/en/function.die.php
-         */
-        die();
-    }
 
     if ($method === "POST") {
         /**
@@ -68,13 +53,13 @@ if ($route === "comments") {
         die();
     }
 
-    if ($method === "PATCH") {
+    if ($method === "DELETE") {
         /**
          * Importe le contenu d'un fichier spécifique dans un autre
          *
          * @see https://www.php.net/manual/en/function.include.php
          */
-        include __DIR__ . "/controllers/comments/patch.php";
+        include __DIR__ . "/controllers/comments/delete.php";
 
         /**
          * Permet de stopper l'exécution du processus à l'endroit où est appelé cette fonction
@@ -83,14 +68,16 @@ if ($route === "comments") {
          */
         die();
     }
+}
 
-    if ($method === "DELETE") {
+if ($route === "films") {
+    if ($method === "POST") {
         /**
          * Importe le contenu d'un fichier spécifique dans un autre
          *
          * @see https://www.php.net/manual/en/function.include.php
          */
-        include __DIR__ . "/controllers/comments/delete.php";
+        include __DIR__ . "/controllers/films/post.php";
 
         /**
          * Permet de stopper l'exécution du processus à l'endroit où est appelé cette fonction
