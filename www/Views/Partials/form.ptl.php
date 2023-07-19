@@ -1,6 +1,4 @@
-<?php if(!empty($errors)): ?>
-<?php print_r($errors);?>
-<?php endif;?>
+
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -41,4 +39,7 @@
                 <input type="reset" value="<?= $config["config"]["reset"] ?>">
             <?php endif; ?>
         </div>
+        <?php if(!empty($errors)): ?>
+        <?php print_r("<p class='text-white'>" . $errors . "</p>");?>
+        <?php endif;?>
     </form>

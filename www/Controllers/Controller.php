@@ -9,26 +9,19 @@ class Controller
 {
     protected function assignUserAndAdminStatus(View $view): void
     {
-        $isAdmin = false;
-        $isUser = false;
-
-
-        if (isset($_SESSION["user_id"])) {
+        if(isset($_SESSION["user_id"])) {
             $user = new User();
-            $userStatus = $user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus();
-
-            $isAdmin = $userStatus >= 2;
-            $isUser = $userStatus >= 1;
-
-            if ($isAdmin) {
-                $movieForm = new \App\Forms\Film();
-                $view->assign("formErrors", $movieForm->errors);
-                $view->assign("movieForm", $movieForm->getConfig());
+            if ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 2) {
+                $view->assign("admin", true);
+                $view->assign("user", true);
+            } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 1) {
+                $view->assign("admin", false);
+                $view->assign("user", true);
+            } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 0) {
+                $view->assign("admin", false);
+                $view->assign("user", false);
             }
         }
-
-        $view->assign("user", $isUser);
-        $view->assign("admin", $isAdmin);
 
     }
 }

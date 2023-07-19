@@ -16,11 +16,9 @@ class Main extends Controller
         $films = (new \App\Models\Film)->getLastInserted(8);
         $view = new View("Main/home", "front");
 
-        $this->assignUserAndAdminStatus($view);
-
         $view->assign("films", $films);
         $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
-
+        $this->assignUserAndAdminStatus($view);
     }
 
     public function review(): void
