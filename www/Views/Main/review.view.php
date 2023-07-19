@@ -1,4 +1,8 @@
-<h2 class="fixed top-0 right-0 m-4 text-white">Welcome <?= $name; ?> </h2>
+<?php
+
+include __DIR__ . "/../header.view.php";
+
+?>
 
 <div class="container mx-auto px-6 py-10">
     <div class="flex flex-wrap">
