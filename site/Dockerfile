@@ -15,6 +15,9 @@ RUN  docker-php-ext-install gd
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN a2enmod rewrite
+RUN a2enmod ssl
+
 COPY server/adibida.fr_ssl_certificate.cer /etc/ssl/certs/
 COPY server/adibida.fr_ssl_certificate_INTERMEDIATE.cer /etc/ssl/certs/
 COPY server/adibida.fr_private.key /etc/ssl/private/
@@ -26,4 +29,4 @@ RUN pecl install yamL
 
 RUN usermod -u 1000 www-data
 
-RUN a2enmod rewrite
+
