@@ -17,10 +17,10 @@ class Controller
             } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 1) {
                 $view->assign("admin", false);
                 $view->assign("user", true);
-            } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 0) {
-                $view->assign("admin", false);
-                $view->assign("user", false);
             }
+        } else {
+            $view->assign("admin", false);
+            $view->assign("user", false);
         }
 
     }

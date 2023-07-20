@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
 </head>
 <body>
-    <main class="w-screen h-screen bg-gray-800">
+    <main class=" min-h-screen bg-gray-800">
         <!-- inclure la vue -->
         <?php include $this->view;?>
     </main>
