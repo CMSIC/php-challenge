@@ -18,6 +18,7 @@ class ComposerStaticInita1f70ebeb2e636133877ab97e6129d14
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
         ),
     );
@@ -30,6 +31,10 @@ class ComposerStaticInita1f70ebeb2e636133877ab97e6129d14
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Faker\\' => 
         array (
