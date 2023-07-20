@@ -18,6 +18,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN a2enmod rewrite
 RUN a2enmod ssl
 
+
 COPY server/adibida.fr_ssl_certificate.cer /etc/ssl/certs/
 COPY server/adibida.fr_ssl_certificate_INTERMEDIATE.cer /etc/ssl/certs/
 COPY server/adibida.fr_private.key /etc/ssl/private/
@@ -28,5 +29,11 @@ WORKDIR /var/www/html/
 RUN pecl install yamL
 
 RUN usermod -u 1000 www-data
+
+COPY /site/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+
 
 
