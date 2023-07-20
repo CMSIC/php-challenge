@@ -43,3 +43,7 @@ film-review:
   action: review
   params:
     - id
+
+movies:
+  controller: Main
+  action: movies

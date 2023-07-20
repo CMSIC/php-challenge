@@ -21,6 +21,16 @@ class Main extends Controller
         $this->assignUserAndAdminStatus($view);
     }
 
+    public function movies() : void
+    {
+        $films = (new \App\Models\Film)->getAll();
+        $view = new View("Main/movies", "front");
+
+        $view->assign("films", $films);
+        $view->assign("name", $_SESSION["firstname"] ?? "visiteur");
+        $this->assignUserAndAdminStatus($view);
+    }
+
     public function review(): void
     {
         $id = $_GET['id'];

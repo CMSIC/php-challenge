@@ -1,23 +1,7 @@
 <?php
 include __DIR__ .  "/../header.view.php";
 ?>
-<!-- <h2 class="fixed top-0 right-0 m-4 text-white">Welcome <?= $name; ?> </h2> -->
-<!-- Main modal -->
 
-
-<!--
-bouton pour ajouter film
-
-<div class="w-full ">
-                    <div class="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600 border border-slate-50 flex" data-modal-target="movie-add-modal" data-modal-toggle="movie-add-modal">
-                        <img src="../../public/assets/img/films/default.svg" alt="" class="m-auto ">
-                    </div>
-                    <h1 class="dark:text-white mt-2">Add a new movie</h1>
-                </div>
-
-                -->
-
-<!-- component -->
 <section class="">
     <div class="container px-6 py-10 mx-auto ">
 
@@ -39,7 +23,7 @@ bouton pour ajouter film
 
 
         </div>
-        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 mt-4 border-b-4 border-blue-700 hover:border-blue-500 rounded transition-all ease-in-out delay-200">Voir tous les films</button>
+        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 mt-4 border-b-4 border-blue-700 hover:border-blue-500 rounded transition-all ease-in-out delay-200" onclick="window.location.href='/movies'">Voir tous les films</button>
     </div>
 </section>
 <script type="application/javascript">
