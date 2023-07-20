@@ -27,6 +27,28 @@ class Admin
                 $movieForm = new FilmForm();
                 $view->assign("formErrors", $movieForm->errors);
                 $view->assign("movieForm", $movieForm->getConfig());
+                $options = [
+                    "Comedy" => "Comedy",
+                    "Drama" => "Drama",
+                    "Action" => "Action",
+                    "Horror" => "Horror",
+                    "Thriller" => "Thriller",
+                    "Western" => "Western",
+                    "Animation" => "Animation",
+                    "Documentary" => "Documentary",
+                    "Science Fiction" => "Science Fiction",
+                    "Fantasy" => "Fantasy",
+                    "Crime" => "Crime",
+                    "Adventure" => "Adventure",
+                    "Mystery" => "Mystery",
+                    "Romance" => "Romance",
+                    "Family" => "Family",
+                    "War" => "War",
+                    "Music" => "Music",
+                    "History" => "History",
+                    "TV Movie" => "TV Movie"
+                ];
+                $view->assign("options", $options);
 
                 if ($movieForm->isSubmited() && $movieForm->isValid()){
                     $formData = $movieForm->getFields();

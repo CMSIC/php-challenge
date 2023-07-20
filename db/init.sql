@@ -56,11 +56,25 @@ ALTER TABLE esgi_comment
         FOREIGN KEY (user_id) REFERENCES esgi_user (id)
             ON DELETE CASCADE;
 
+ALTER TABLE esgi_comment
+    DROP CONSTRAINT esgi_comment_film_id_fkey,
+    ADD CONSTRAINT esgi_comment_film_id_fkey
+        FOREIGN KEY (film_id) REFERENCES esgi_film (id)
+            ON DELETE CASCADE;
+
+
 ALTER TABLE esgi_note
     DROP CONSTRAINT esgi_note_user_id_fkey,
     ADD CONSTRAINT esgi_note_user_id_fkey
         FOREIGN KEY (user_id) REFERENCES esgi_user (id)
             ON DELETE CASCADE;
+
+ALTER TABLE esgi_note
+    DROP CONSTRAINT esgi_note_film_id_fkey,
+    ADD CONSTRAINT esgi_note_film_id_fkey
+        FOREIGN KEY (film_id) REFERENCES esgi_film (id)
+            ON DELETE CASCADE;
+
 
 
 
