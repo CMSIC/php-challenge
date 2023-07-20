@@ -10,7 +10,13 @@ use App\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require 'vendor/autoload.php';
+use Firebase\JWT\JWT;
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class Auth
 {
@@ -24,7 +30,7 @@ class Auth
         $view->assign("pageDescription", "Page de connexion.");
 
 
-        if($form->isSubmited() && $form->isValid()){
+        if ($form->isSubmited() && $form->isValid()) {
             $formData = $form->getFields();
             //echo "formdata";
             //var_dump($formData);
@@ -33,8 +39,7 @@ class Auth
                 $user = new User();
                 $user = $user->getOneWhere(['email' => $formData['email']]);
                 //var_dump($user);
-                // Assuming you have a getPassword method in User model which return the user's password.
-                if($user && password_verify($formData['pwd'], $user->getPwd())) {
+                if ($user && password_verify($formData['pwd'], $user->getPwd())) {
                     // Start session and store user details in session
                     session_start();
                     echo "session start";
@@ -68,7 +73,7 @@ class Auth
         $view->assign("pageDescription", "Page inscription.");
 
         //Form validé ? et correct ?
-        if($form->isSubmited() && $form->isValid()){
+        if ($form->isSubmited() && $form->isValid()) {
             $formData = $form->getFields();
             if ($formData['firstname'] && $formData['lastname'] && $formData['email'] && $formData['pwd']) {
                 $user = new User();
@@ -78,7 +83,23 @@ class Auth
                 $user->setPwd($formData['pwd']);
                 $user->setCountry($formData['country']);
                 $user->setStatus(0);
-                $token = bin2hex(random_bytes(50));  // generate a verification token
+                // $token = bin2hex(random_bytes(50)); // old token gen
+                echo 'Before token creation';
+                $tokenArray = array(
+                    "firstname" => $user->getFirstname(),
+                    "lastname" => $user->getLastname(),
+                    "email" => $user->getEmail(),
+                    "country" => $user->getCountry(),
+                );
+                var_dump($tokenArray);
+
+                try {
+                    $token = JWT::encode($tokenArray, '4d4m1t0l3', 'HS256');
+                } catch (\Exception $e) {
+                    echo 'Caught exception: ', $e->getMessage(), "\n";
+                }
+                echo 'After token creation';
+                var_dump($token);
                 $user->setToken($token);
                 $user->save();
 
@@ -103,9 +124,9 @@ class Auth
                     //Content
                     $mail->isHTML(true);
                     $mail->Subject = 'CMS - Welcome - Verification';
-                    $mail->Body    = 'Welcome to our website <b>' . $user->getFirstname() . '</b><br> Please click on the below link to verify your email address<br><a target="_blank" href="http://localhost/verify?token=' . $token . '">Verify Email</a>';
+                    $mail->Body = 'Welcome to our website <b>' . $user->getFirstname() . '</b><br> Please click on the below link to verify your email address<br><a target="_blank" href="http://localhost/verify?token=' . $token . '">Verify Email</a>';
 
-                    if($mail->send()){
+                    if ($mail->send()) {
                         session_start();
                         $_SESSION['email'] = $user->getEmail();
                         $_SESSION['firstname'] = $user->getFirstname();
@@ -115,9 +136,10 @@ class Auth
                         exit();
                     }
 
-                    } catch (Exception $e) {
-                        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-                    }
+                } catch (Exception $e) {
+                    var_dump($token);
+                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                }
 
             }
         }
