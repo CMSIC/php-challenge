@@ -26,12 +26,6 @@ services:
       POSTGRES_USER: esgi
       POSTGRES_PASSWORD: Test1234
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-
   mail:
     image: namshi/smtp
     environment:
