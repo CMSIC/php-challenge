@@ -45,7 +45,7 @@ include __DIR__ . "/../adminHeader.view.php";
             <th class="text-center">Année</th>
             <th class="text-center">Durée</th>
             <th class="text-center">Catégorie</th>
-            <th class="text-center">Ajouter un film</th>
+            <th class="text-center"></th>
         </tr>
         </thead>
         <tbody class="">
