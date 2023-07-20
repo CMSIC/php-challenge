@@ -50,7 +50,7 @@ include __DIR__ . "/../header.view.php";
                 <div class="bg-gray-100 px-4 py-2 mb-2">
                     <p class="text-gray-800"><?= $comment->getContent() ?></p>
                     <p class="text-gray-500 font-bold">Posted by <?= $commentUser->getFirstname() ?> on <?= $comment->getDateInserted() ?></p>
-                    <?php if($admin === true){ ?>
+                    <?php if(isset($admin) && $admin === true){ ?>
                     <button class="delete-comment" data-comment-id="<?= $comment->getId() ?>">Supprimer</button>
                     <?php } ?>
                 </div>
