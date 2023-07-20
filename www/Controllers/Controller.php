@@ -11,10 +11,10 @@ class Controller
     {
         if(isset($_SESSION["user_id"])) {
             $user = new User();
-            if ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 2) {
+            if ($user->getOneWhere(["id" => $_SESSION["user_id"]]) && $user->getStatus() === 2) {
                 $view->assign("admin", true);
                 $view->assign("user", true);
-            } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]])->getStatus() === 1) {
+            } elseif ($user->getOneWhere(["id" => $_SESSION["user_id"]]) && $user->getStatus() === 1) {
                 $view->assign("admin", false);
                 $view->assign("user", true);
             }
