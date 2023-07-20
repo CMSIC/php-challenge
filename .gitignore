@@ -2,9 +2,10 @@ www/package-lock.json
 
 www/node_modules
 
-.idea/
+.idea/*
 
 .idea
 .idea/php-challenge.iml
-.idea/php-challenge.iml
-.idea/php-challenge.iml
+
+www/public/assets/img/films/*
+!www/public/assets/img/films/default.svg
