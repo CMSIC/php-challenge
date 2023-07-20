@@ -1,6 +1,9 @@
 <?php
 include __DIR__ . "/../adminHeader.view.php";
 ?>
+<div class="h-16">
+
+</div>
 <div id="movie-add-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <?php $this->partial("movieForm", $movieForm, $formErrors) ?>
 </div>
@@ -30,7 +33,7 @@ include __DIR__ . "/../adminHeader.view.php";
                 <td class="text-center">
                     <!-- Notez que j'ai ajouté la classe "btn-save-status" à ce bouton -->
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded btn-save-status">Valider</button>
-                    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">Supprimer</button>
+                    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded btn-delete-user">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach; ?>

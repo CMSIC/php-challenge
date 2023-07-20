@@ -36,6 +36,34 @@ $('.btn-save-status').on('click', function() {
 });
 
 
+$('.btn-delete-user').on('click', function() {
+    // Get the user ID from the data attribute "data-user-id"
+    const userId = $(this).closest('tr').data('user-id');
+
+    // Prepare data to be sent to the server
+    const data = {
+        id: userId
+    };
+
+    // Send AJAX DELETE request
+    $.ajax({
+        url: `/api/users`, // Replace with your actual API URL
+        type: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify(data), // Convert the JavaScript object to a JSON string
+        success: function(response) {
+            console.log(response);
+            location.reload();
+            //alert('User deleted successfully.');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+            alert('Failed to delete user.');
+        }
+    });
+});
+
+
 
 
 

@@ -56,6 +56,13 @@ ALTER TABLE esgi_comment
         FOREIGN KEY (user_id) REFERENCES esgi_user (id)
             ON DELETE CASCADE;
 
+ALTER TABLE esgi_note
+    DROP CONSTRAINT esgi_note_user_id_fkey,
+    ADD CONSTRAINT esgi_note_user_id_fkey
+        FOREIGN KEY (user_id) REFERENCES esgi_user (id)
+            ON DELETE CASCADE;
+
+
 
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (1, 'Adib', 'HAMCHI', 'adib.hamchi@hotmail.fr', '$2a$10$oIuMtDros8N5IY4UQqtzPOcEFcsDTg.AMzMX6luE7xClZiu9cLUGK', 'FR', '85bc39555aef1d139875c3c95164103f16233088cd607d83ac0f9e869d0c7d2d4a58f51c8d19df95e488f7735cda29995dd7', 2, '2023-06-30 18:58:13.531179', '2023-06-30 18:58:13.531179');
 INSERT INTO public.esgi_user (id, firstname, lastname, email, pwd, country, token, status, date_inserted, date_updated) VALUES (3, 'Nia', 'WINDLER', 'reinger.grover@altenwerth.com', '$2y$10$pzSIlwj8RuLb5WvpiwVJpOxLdW/LVQ8NTopkBLmzFLAFzJNiNzIAa', 'AG', '6bd7ea00b574ec80cbccd8978a256aa7b41c30c72a0be07760566a2490b5ebbc3bd5b58982db34563970831d72d406104816', 2, '2023-06-30 18:58:13.000000', '2023-06-30 18:58:13.575215');

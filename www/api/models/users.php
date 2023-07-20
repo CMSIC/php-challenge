@@ -22,21 +22,19 @@ class UserModel
 //        $createUserQuery->execute($user);
 //    }
 //
-//    public static function getById($id)
-//    {
-//        $connection = getDatabaseConnection();
-//        $getUserByIdQuery = $connection->prepare("SELECT * FROM users WHERE id = :id;");
-//
-//        $getUserByIdQuery->execute(
-//            [
-//            "id" => $id
-//            ]
-//        );
-//
-//        $user = $getUserByIdQuery->fetch();
-//
-//        return $user;
-//    }
+    public static function getById($id)
+    {
+        $connection = getDatabaseConnection();
+        $getUserByIdQuery = $connection->prepare("SELECT * FROM esgi_user WHERE id = :id;");
+
+        $getUserByIdQuery->execute(
+            [
+            "id" => $id
+            ]
+        );
+
+        return $getUserByIdQuery->fetch();
+    }
 //
 //    public static function getByEmail($email)
 //    {
@@ -56,12 +54,12 @@ class UserModel
 //        return $getUserByIdQuery->fetch();
 //    }
 //
-//    public static function deleteById($user)
-//    {
-//        $connection = getDatabaseConnection();
-//        $deleteByIdQuery = $connection->prepare("DELETE FROM users WHERE id = :id;");
-//        $deleteByIdQuery->execute($user);
-//    }
+    public static function deleteById($user)
+    {
+        $connection = getDatabaseConnection();
+        $deleteByIdQuery = $connection->prepare("DELETE FROM esgi_user WHERE id = :id;");
+        $deleteByIdQuery->execute($user);
+    }
 
     public static function updateById($json)
     {

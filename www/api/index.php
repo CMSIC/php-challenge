@@ -104,6 +104,22 @@ if ($route === "users") {
          */
         die();
     }
+
+    if ($method === "DELETE") {
+        /**
+         * Importe le contenu d'un fichier spécifique dans un autre
+         *
+         * @see https://www.php.net/manual/en/function.include.php
+         */
+        include __DIR__ . "/controllers/users/delete.php";
+
+        /**
+         * Permet de stopper l'exécution du processus à l'endroit où est appelé cette fonction
+         *
+         * @see https://www.php.net/manual/en/function.die.php
+         */
+        die();
+    }
 }
 
 /**
