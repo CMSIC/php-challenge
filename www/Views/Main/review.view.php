@@ -19,7 +19,7 @@ include __DIR__ . "/../header.view.php";
         </div>
         <div class="w-full md:w-1/2 lg:w-2/3 xl:w-3/4">
 
-            <?php if($user || $admin){ ?>
+            <?php if((isset($user) && $user === true) || (isset($admin) && $admin === true) ){ ?>
                 <!-- Ajout du formulaire pour poster un commentaire -->
                 <div class="mt-4">
                     <h3 class="text-lg font-bold mb-2 text-white">Add a Comment</h3>
