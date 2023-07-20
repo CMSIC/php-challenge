@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Back</title>
-    <meta name="description" content="ceci est un super site">
+    <title><?= $pageTitle ?? "Front" ?></title>
+    <meta name="description" content="<?= $pageDescription ?? "Ceci est un super site" ?>">
     <!-- Include DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
     <!-- Include Tailwind CSS -->

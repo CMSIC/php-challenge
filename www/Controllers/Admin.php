@@ -2,9 +2,9 @@
 
 
 namespace App\Controllers;
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 use App\Core\View;
 use App\Models\User;
 use App\Models\Film;
@@ -23,6 +23,9 @@ class Admin
                 $view->assign("name", $user->getFirstname());
                 $view->assign("users", $users);
                 $view->assign("films", $allfilms);
+
+                $view->assign("pageTitle", "Dashboard - Movie Reviews");
+                $view->assign("pageDescription", "Page d'administration du site.");
 
                 $movieForm = new FilmForm();
                 $view->assign("formErrors", $movieForm->errors);

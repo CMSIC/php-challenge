@@ -20,6 +20,9 @@ class Auth
         $view = new View("Auth/login", "front");
         $view->assign("formErrors", $form->errors);
         $view->assign("form", $form->getConfig());
+        $view->assign("pageTitle", "Connexion - Movie Reviews");
+        $view->assign("pageDescription", "Page de connexion.");
+
 
         if($form->isSubmited() && $form->isValid()){
             $formData = $form->getFields();
@@ -60,6 +63,9 @@ class Auth
         $view = new View("Auth/register", "front");
         $view->assign("formErrors", $form->errors);
         $view->assign("form", $form->getConfig());
+
+        $view->assign("pageTitle", "Inscription - Movie Reviews");
+        $view->assign("pageDescription", "Page inscription.");
 
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){

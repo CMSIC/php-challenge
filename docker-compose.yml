@@ -7,7 +7,7 @@ services:
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
     ports :
-     - "80:80"
+     - "8080:80"
     volumes:
      - ./www:/var/www/html/
      - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf

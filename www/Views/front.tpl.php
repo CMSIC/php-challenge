@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Front</title>
-    <meta name="description" content="ceci est un super site">
+    <title><?= $pageTitle ?? "Front" ?></title>
+    <meta name="description" content="<?= $pageDescription ?? "Ceci est un super site" ?>">
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
